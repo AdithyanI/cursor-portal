@@ -17,6 +17,10 @@ import vertexai
 from vertexai.preview.generative_models import GenerativeModel, Image
 from google.cloud import aiplatform
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -30,8 +34,9 @@ class VertexImageGenerator:
     def __init__(
         self,
         project_id: Optional[str] = None,
-        location: str = "us-central1",
-        model_name: str = "imagegeneration@002"
+        location: Optional[str] = None,
+        model_name: Optional[str] = None,
+        credentials_path: Optional[str] = None
     ):
         """
         Initialize the Vertex AI Image Generator.
@@ -39,9 +44,11 @@ class VertexImageGenerator:
         Args:
             project_id (str, optional): Google Cloud project ID. If not provided,
                                       will try to get from environment variable.
-            location (str): The location/region for Vertex AI services.
-            model_name (str): The model to use for image generation.
+            location (str, optional): The location/region for Vertex AI services.
+            model_name (str, optional): The model to use for image generation.
+            credentials_path (str, optional): Path to service account credentials JSON.
         """
+        # Load credentials from environment or parameters
         self.project_id = project_id or os.getenv("GOOGLE_CLOUD_PROJECT")
         if not self.project_id:
             raise ValueError(
@@ -49,8 +56,24 @@ class VertexImageGenerator:
                 "or GOOGLE_CLOUD_PROJECT environment variable"
             )
 
-        self.location = location
-        self.model_name = model_name
+        # Set credentials path if provided
+        if credentials_path:
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
+
+        # Check if credentials are set
+        if not os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+            raise ValueError(
+                "GOOGLE_APPLICATION_CREDENTIALS environment variable must be set "
+                "to the path of your service account key JSON file"
+            )
+
+        self.location = location or os.getenv("VERTEX_LOCATION", "us-central1")
+        self.model_name = model_name or os.getenv("VERTEX_MODEL_NAME", "imagegeneration@002")
+
+        logger.info(f"Initializing with project_id: {self.project_id}")
+        logger.info(f"Using location: {self.location}")
+        logger.info(f"Using model: {self.model_name}")
+
         self._init_vertex_ai()
 
     def _init_vertex_ai(self):
