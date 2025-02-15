@@ -1,7 +1,3 @@
-Below is a **tools-only** reference for creating an MCP server. This guide omits all other MCP features (prompts, resources, logging, etc.) and focuses solely on **Tools**—so it’s ideal if your client only supports tools.
-
----
-
 # MCP Server Documentation (Tools-Only)
 
 ## 1. Overview: Tools in MCP
@@ -210,4 +206,3 @@ Clients that receive this notification typically re-call `tools/list` to get the
 4. **(Optional)** If your tool set changes dynamically, send `notifications/tools/list_changed`.
 
 That’s it—no other MCP features are needed if your server is **tools-only**.
-
