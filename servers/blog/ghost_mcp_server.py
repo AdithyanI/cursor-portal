@@ -117,8 +117,7 @@ def create_ghost_post(title: str, html_content: str, status: str = "draft") -> D
     logger.info("Starting to create a new Ghost post...")
 
     # 1) Fetch settings from environment or config
-    # Make sure these are set in your environment or .env file, etc.
-    ghost_admin_api_url = os.environ.get("GHOST_ADMIN_API_URL")  # e.g. https://<your-ghost-domain>/ghost/api/admin/
+    ghost_admin_api_url = os.environ.get("GHOST_ADMIN_API_URL")  # e.g. https://<your-ghost-domain>
     admin_api_key = os.environ.get("GHOST_ADMIN_API_KEY")        # e.g. <key_id>:<secret>
 
     if not ghost_admin_api_url or not admin_api_key:
@@ -131,7 +130,7 @@ def create_ghost_post(title: str, html_content: str, status: str = "draft") -> D
     headers = {
         "Authorization": f"Ghost {token}",
         "Content-Type": "application/json",
-        "Accept-Version": "v5.0"  # or whichever version you want
+        "Accept-Version": "v5.0"  # Adding API version header
     }
 
     # 4) Build the request body
@@ -147,12 +146,22 @@ def create_ghost_post(title: str, html_content: str, status: str = "draft") -> D
 
     # 5) Make the POST request to create a post
     try:
+        # Construct the full API URL
+        api_url = f"{ghost_admin_api_url.rstrip('/')}/ghost/api/admin/posts/?source=html"
+
         response = requests.post(
-            url=f"{ghost_admin_api_url.rstrip('/')}/posts/?source=html",
+            url=api_url,
             headers=headers,
             json=post_data,
             timeout=30
         )
+
+        # Log the request details for debugging
+        logger.info(f"Request URL: {api_url}")
+        logger.info(f"Request Headers: {headers}")
+        logger.info(f"Response Status: {response.status_code}")
+        logger.info(f"Response Content: {response.text}")
+
         response.raise_for_status()  # Raise an exception for 4xx/5xx errors
 
         # 6) Parse the response JSON
@@ -162,6 +171,7 @@ def create_ghost_post(title: str, html_content: str, status: str = "draft") -> D
 
     except requests.RequestException as re:
         logger.error(f"Request error creating Ghost post: {re}")
+        logger.error(f"Response content: {getattr(re.response, 'text', 'No response content')}")
         raise
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
@@ -206,7 +216,7 @@ if __name__ == "__main__":
 
         <p>You can also add images:</p>
         <figure>
-            <img src="https://source.unsplash.com/random/800x400" alt="Sample image">
+            <img src="https://aipodcast.ing/content/images/size/w600/2024/03/A_clean_minimalist_vector_logo_of_a_microphone_.png" alt="Sample image">
             <figcaption>A sample image caption</figcaption>
         </figure>
         """
@@ -216,7 +226,7 @@ if __name__ == "__main__":
         result = create_ghost_post(
             title=test_title,
             html_content=test_html_content,
-            status="draft"  # Set to "published" if you want to publish immediately
+            status="published"  # Set to "published" if you want to publish immediately
         )
 
         logger.info(f"Post created successfully: {json.dumps(result, indent=2)}")
