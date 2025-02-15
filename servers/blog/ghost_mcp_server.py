@@ -180,57 +180,69 @@ def create_ghost_post(title: str, html_content: str, status: str = "draft") -> D
 # ------------------------------------------------------------------------------
 # Main entry point
 # ------------------------------------------------------------------------------
-# if __name__ == "__main__":
-#     try:
-#         logger.info("Starting Ghost Admin API MCP server...")
-#         mcp.run(transport="stdio")  # Using stdio for Cursor integration
-#     except Exception as e:
-#         logger.error(f"Error running Ghost Admin API MCP server: {e}")
-#         raise
+if __name__ == "__main__":
+    try:
+        logger.info("Starting Ghost Admin API MCP server...")
+        mcp.run(transport="stdio")  # Using stdio for Cursor integration
+    except Exception as e:
+        logger.error(f"Error running Ghost Admin API MCP server: {e}")
+        raise
 
 # ------------------------------------------------------------------------------
 # Test section - uncomment to test post creation
 # ------------------------------------------------------------------------------
-if __name__ == "__main__":
-    try:
-        # Sample HTML content with various formatting
-        test_title = "Test Post: Getting Started with Ghost"
-        test_html_content = """
-        <h1>Welcome to My Ghost Blog!</h1>
+# if __name__ == "__main__":
+#     try:
+#         # Sample HTML content with various formatting
+#         test_title = "Test Post: Getting Started with Ghost"
+#         test_html_content = """
+#         <h1>Welcome to My Ghost Blog!</h1>
 
-        <p>This is a test post demonstrating various HTML formatting capabilities in Ghost.</p>
+#         <p>This is a test post demonstrating various HTML formatting capabilities in Ghost.</p>
 
-        <h2>Features Overview</h2>
-        <ul>
-            <li><strong>Bold text</strong> for emphasis</li>
-            <li><em>Italic text</em> for subtle emphasis</li>
-            <li>Regular paragraphs with <a href="https://ghost.org">links</a></li>
-        </ul>
+#         <h2>Features Overview</h2>
+#         <ul>
+#             <li><strong>Bold text</strong> for emphasis</li>
+#             <li><em>Italic text</em> for subtle emphasis</li>
+#             <li>Regular paragraphs with <a href="https://ghost.org">links</a></li>
+#         </ul>
 
-        <blockquote>
-            <p>This is how blockquotes look in Ghost. Great for highlighting important quotes or notes.</p>
-        </blockquote>
+#         <blockquote>
+#             <p>This is how blockquotes look in Ghost. Great for highlighting important quotes or notes.</p>
+#         </blockquote>
 
-        <h3>Code Example</h3>
-        <pre><code>print("Hello, Ghost!")</code></pre>
+#         <h3>Code Example</h3>
+#         <pre><code>print("Hello, Ghost!")</code></pre>
 
-        <p>You can also add images:</p>
-        <figure>
-            <img src="https://aipodcast.ing/content/images/size/w600/2024/03/A_clean_minimalist_vector_logo_of_a_microphone_.png" alt="Sample image">
-            <figcaption>A sample image caption</figcaption>
-        </figure>
-        """
+#         <p>You can also add images:</p>
 
-        # Create the post
-        logger.info("Creating test post...")
-        result = create_ghost_post(
-            title=test_title,
-            html_content=test_html_content,
-            status="published"  # Set to "published" if you want to publish immediately
-        )
+#         <figure class="kg-card kg-image-card">
+#             <img src="https://aipodcast.ing/content/images/size/w600/2024/03/A_clean_minimalist_vector_logo_of_a_microphone_.png"
+#                  alt="AI Podcast Logo"
+#                  class="kg-image">
+#             <figcaption>AI Podcast Logo - Full Width</figcaption>
+#         </figure>
 
-        logger.info(f"Post created successfully: {json.dumps(result, indent=2)}")
+#         <p>And here's the same image in a different size:</p>
 
-    except Exception as e:
-        logger.error(f"Error in test: {e}")
-        raise
+#         <figure class="kg-card kg-image-card kg-width-wide">
+#             <img src="https://aipodcast.ing/content/images/size/w600/2024/03/A_clean_minimalist_vector_logo_of_a_microphone_.png"
+#                  alt="AI Podcast Logo - Wide"
+#                  class="kg-image">
+#             <figcaption>AI Podcast Logo - Wide Format</figcaption>
+#         </figure>
+#         """
+
+#         # Create the post
+#         logger.info("Creating test post...")
+#         result = create_ghost_post(
+#             title=test_title,
+#             html_content=test_html_content,
+#             status="published"  # Set to "published" if you want to publish immediately
+#         )
+
+#         logger.info(f"Post created successfully: {json.dumps(result, indent=2)}")
+
+#     except Exception as e:
+#         logger.error(f"Error in test: {e}")
+#         raise
