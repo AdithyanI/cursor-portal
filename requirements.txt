@@ -1,0 +1,2 @@
+mcp-python-sdk>=0.1.0
+mcp[cli]==1.2.1
