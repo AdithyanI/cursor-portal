@@ -355,12 +355,13 @@ server.addTool(retrieveAvatarsTool);
 server.addTool(downloadVideoTool);
 
 // Start the server
-server.start({
-  transportType: "sse",
-  sse: {
-    endpoint: "/sse",
-    port: 8080,
-  },
-});
+async function main() {
+  await server.start({
+    transportType: 'stdio'
+  });
+}
 
-
+main().catch((error) => {
+  process.stderr.write(`${error}\n`);
+  process.exit(1);
+}); 
