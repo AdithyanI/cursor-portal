@@ -1,141 +1,158 @@
-# MCP Server Hub
+# 🌌 Cursor Portal: Your Gateway to the Digital Universe
 
-Welcome to the **MCP Server Hub** repository. This project is designed to serve as a single, unified backend driver for all your marketing and creative content needs, leveraging the Model Context Protocol (MCP) to seamlessly connect to various tools. Our goal is to reduce context switching and simplify automation across writing, publishing, and creative tasks.
+> Because real hackers never leave their IDE
 
-## Overview
+## 🚀 Vision
 
-**Objective:**  
-Build a modular, MCP-based server architecture that enables:
-- **Centralized Content Creation:** Generate and refine text (in your voice) directly within your primary interface (Cursor).
-- **Automated Publishing:** Seamlessly push content to multiple platforms such as LinkedIn, blog platforms (e.g., Ghost), and websites.
-- **Enhanced Social Media Integration:** Publish to Twitter, LinkedIn, Instagram, and more.
-- **Creative Extensions (Stretch Goals):** Integrate image generation, video content generation, and script creation servers to enrich your content automatically.
+Transform Cursor into your singular interface to the digital world. No more context switching, no more leaving your comfort zone. Write code, create content, and share your brilliance with the world—all from within your IDE.
+ 
+- Blog about your latest hack without opening a browser
+- Generate and edit videos without touching another app
+- Share your genius with the world without leaving your safe space
 
-**Why MCP?**  
-- **Unified Interface:** One single driver for all tasks with minimal context switching.
-- **Scalability:** Easily plug in new MCP servers as new tools or platforms emerge.
-- **Automation:** Leverage AI capabilities to automate repetitive tasks (from content creation to publishing) and boost your marketing efforts.
+## ✨ Current Features
 
-## Goals & Use Cases
+### 📝 Blog Integration
+- Create and publish blog posts directly from Cursor
+- Embed media (images, videos) seamlessly
+- Manage your Ghost blog without touching the admin panel
 
-Within the next few days, our short-term goals are:
-1. **Quick Start:** Get a basic MCP server up and running that can respond to simple content-generation requests (target: 30 seconds response time).
-2. **Content Visibility:** Enable rapid publishing of content (LinkedIn posts, blog articles) to increase online presence.
-3. **High-Impact Content:** Support the generation and publishing of high-quality, personalized content (e.g., CEO blog posts, thought leadership pieces).
-4. **Creative Integration:** Experiment with integrating an image generation server (and later a video server) to auto-generate media assets that accompany your content.
+### 🎬 Video Creation
+- Generate AI videos using HeyGen
+- Edit and customize videos
+- Upload and embed videos in your blog posts
 
-## Repository Structure
+### 🔮 Coming Soon
+- Social media integration
+- Direct image generation and editing
+- More platform integrations
+- Ordering pizza 
 
-Here's a proposed directory tree to organize the project:
+## 🛠 How to Use
 
-```
-mcp-server-hub/
-├── README.md               # This file
-├── docs/
-│   ├── architecture.md     # High-level architecture and design decisions
-│   └── mcp-specs.md        # Documentation on MCP specifics for our integration
-├── servers/
-│   ├── blog/               # Blog Posting Writer & Publisher (e.g., Ghost integration)
-│   │   ├── index.js        # Main server file (or Python equivalent)
-│   │   └── config.js       # Configuration specific to blog publishing
-│   ├── social/
-│   │   ├── twitter/        # Twitter posting server
-│   │   │   ├── index.js
-│   │   │   └── config.js
-│   │   ├── linkedin/       # LinkedIn posting server
-│   │   │   ├── index.js
-│   │   │   └── config.js
-│   │   └── instagram/      # Instagram posting server (initial version)
-│   ├── creative/
-│   │   ├── script-creator/ # Script Creation Server (Adi’s voice)
-│   │   ├── video-gen/      # Video Generation Server (stretch goal)
-│   │   └── image-gen/      # Image Generation Server (optional enhancement)
-├── tasks/
-│   ├── task-allocation.md  # Assignments and milestones for developers
-│   └── roadmap.md          # Future enhancements and stretch goals
-└── package.json            # (If using Node.js, dependency management here)
+### Setup
+
+> ⚠️ **Note:** Currently, only Python MCP servers are supported in Cursor. Node.js servers are not yet working with the Cursor MCP protocol.
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/cursor-portal.git
+cd cursor-portal
 ```
 
-## Getting Started
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/your-org/mcp-server-hub.git
-   cd mcp-server-hub
-   ```
+3. Configure your environment:
+```bash
+# Create .env files in respective directories:
+# servers/blog/.env
+GHOST_ADMIN_API_URL=your_ghost_url
+GHOST_ADMIN_API_KEY=your_api_key
+HEYGEN_API_KEY=your_heygen_api_key
 
-2. **Installation:**
-   - For Node.js-based servers:
-     ```bash
-     npm install
-     ```
-   - (Or follow language-specific setup instructions as documented in each server’s README.)
+# servers/creative/heygen-python-mcp/.env
+HEYGEN_API_KEY=your_heygen_api_key
+```
 
-3. **Running a Server (Example: Blog Server):**
-   ```bash
-   cd servers/blog
-   npm start
-   ```
-   This server will register itself with the existing MCP client.
+Add MCP servers in cursor settings using the command option:
+path-to-venv path-to-server.py
 
-4. **Configuration:**
-   - Each server module has its own configuration file (e.g., `config.js`). Update these with your API keys, endpoints, and other integration details.
+### Basic Usage
 
-## Task Allocation & Developer Roles
+Open composer in Cursor (cmd+l) and select Claude agent.
 
-To ensure rapid progress over the next couple of days, here’s an initial breakdown of tasks:
+#### Writing a Blog Post
+1. Start a conversation with Claude and mention you want to use the blog MCP:
+```
+"Hey, I'd like to write a blog post about [your topic]"
+```
 
-- **Adi:**  
-  - Set up the base repository structure.
-  - Prepare initial documentation (architecture.md and mcp-specs.md).
-  - Oversee the integration of the Blog Posting Writer & Publisher server.
-  - Initial commit & repo setup.
+2. Claude will help you create the post using these commands:
+```python
+# Create a new draft
+mcp_create_ghost_post(
+    title="Your Amazing Title",
+    html_content="<p>Your content with HTML formatting</p>",
+    status="draft"
+)
 
-- **Developer 1:**  
-  - Build and test the **Blog Server** module (integration with Ghost or preferred blogging platform).
-  - Write unit tests and ensure 30-second response capability.
+# Add images
+mcp_add_image_to_post(
+    post_id="your_post_id",
+    image_url="https://your-image-url.com/image.jpg"
+)
 
-- **Developer 2:**  
-  - Develop the **Social Servers**:
-    - Twitter server integration.
-    - LinkedIn server integration.
-  - Begin work on Instagram server if time permits.
+# Edit the post
+mcp_edit_ghost_post(
+    post_id="your_post_id",
+    title="Updated Title",
+    html_content="<p>Updated content</p>"
+)
 
-- **Developer 3:**  
-  - Prototype the **Creative Modules**:
-    - Start with a basic **Script Creation Server**.
-    - Research requirements for the **Image Generation Server** (optional for initial release).
+# When ready to publish
+mcp_edit_ghost_post(
+    post_id="your_post_id",
+    status="published"
+)
+```
 
-- **All Developers:**  
-  - Contribute to the `docs/` directory with updates on architecture, integration challenges, and best practices.
-  - Collaborate on the `tasks/task-allocation.md` file to update progress and reassign tasks as needed.
+#### Creating and Adding Videos
+1. Generate a video:
+```python
+# Generate the video
+mcp_generate_video(
+    script="Your video script here"
+)
+# Response will include a video_id
 
-## Future Roadmap
+# Download the generated video
+mcp_download_video(
+    video_id="your_video_id"
+)
 
-- **Short-Term:**  
-  - Launch the core MCP servers for blog and social media integrations.
-  - Ensure seamless connectivity with the existing MCP client.
+# Upload to Ghost and add to post
+mcp_upload_video_to_ghost(
+    video_id="your_video_id"
+)
 
-- **Mid-Term:**  
-  - Expand creative modules (script creation, image, and video generation).
-  - Integrate feedback from initial deployments (e.g., LinkedIn publishing effectiveness).
+# Add to your blog post
+mcp_edit_ghost_post(
+    post_id="your_post_id",
+    video_id="your_video_id",
+    video_position="top"  # or "bottom"
+)
+```
 
-- **Long-Term:**  
-  - Explore additional MCP server integrations (e.g., content analytics, SEO enhancements).
-  - Refine automation to support a wider range of marketing and creative workflows.
+Example conversation flow:
+```
+You: "I want to create a blog post about my new coding project with a video intro"
 
-## Contributing
+Claude: "I'll help you create that. First, let's generate a video introduction..."
+[Claude will guide you through the process using the commands above]
+```
 
-We welcome contributions! Please follow these guidelines:
-- Create a feature branch for your changes.
-- Update documentation as you add or modify features.
-- Ensure all code is well-tested.
-- Discuss major changes in the issues before implementation.
+
+## 🌟 Why Cursor Portal?
+
+- **Stay in Flow**: No more context switching between applications
+- **Streamlined Workflow**: Everything you need, right where you code
+- **Developer-First**: Built by developers, for developers
+- **Extensible**: Easy to add new integrations and features
+
+Example of a blog post with a video:
+https://www.adithyan.blog/p/79ad812b-8c53-4fca-91f7-a5a8930024c3/
+
+
+## 🙏 Acknowledgments
+
+- [Cursor](https://cursor.sh/) - The amazing IDE that makes this possible
+- [Ghost](https://ghost.org/) - The blogging platform we integrate with
+- [HeyGen](https://www.heygen.com/) - For their awesome video generation API
+- [Speedinvest](https://speedinvest.com/) - For the cosy hackathon atmosphere
 
 ---
 
-**Let’s build a system that lets you create, publish, and manage content effortlessly—all from within one centralized tool.**
 
-If you have any questions or need further clarification, please feel free to reach out on our team’s Slack channel or via GitHub Issues.
-
-Happy coding!
