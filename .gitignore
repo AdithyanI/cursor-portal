@@ -1,3 +1,7 @@
+# Environment variables
+.env
+**/.env
+
 # Python
 __pycache__/
 *.py[cod]
@@ -21,11 +25,10 @@ wheels/
 *.egg
 
 # Virtual Environment
-.env
-.venv
-env/
 venv/
 ENV/
+env/
+.env/
 
 # IDE
 .idea/
@@ -33,24 +36,13 @@ ENV/
 *.swp
 *.swo
 
-# Generated content
-generated_images/
-*.png
-*.jpg
-*.jpeg
-*.gif
+# OS
+.DS_Store
+Thumbs.db
+
+# Output directories
+**/output/
+**/temp/
 
 # Logs
-*.log
-
-# Google Cloud credentials
-**/application_default_credentials.json
-**/service-account-key.json
-credentials.json
-
-# Environment files
-**/.env
-.env.*
-!.env.example
-servers/.DS_Store
-servers/media/.DS_Store
+*.log 
