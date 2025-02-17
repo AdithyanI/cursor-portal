@@ -284,7 +284,7 @@ def edit_ghost_post(
     Example of working video embed HTML:
     ```html
     <!-- kg-card-begin: html -->
-    <div class="kg-card kg-video-card" style="max-width: 600px; margin: 2em auto;">
+    <div class="kg-card kg-video-card" style="max-width: 400px; margin: 2em auto;">
         <video 
             src="https://your-ghost-domain/content/media/your-video.mp4"
             controls
