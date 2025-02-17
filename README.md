@@ -126,26 +126,21 @@ Server Path: /Users/you/cursor-portal/servers/creative/heygen-python-mcp/heygen-
 - **Developer-First**: Built by developers, for developers
 - **Extensible**: Easy to add new integrations and features
 
+example of blog with video:
+https://www.adithyan.blog/p/79ad812b-8c53-4fca-91f7-a5a8930024c3/
 ## 🤝 Contributing
 
 We welcome contributions! Whether it's adding new features, improving documentation, or reporting bugs, every contribution helps make Cursor Portal better.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
 - [Cursor](https://cursor.sh/) - The amazing IDE that makes this possible
 - [Ghost](https://ghost.org/) - The blogging platform we integrate with
 - [HeyGen](https://www.heygen.com/) - For their awesome video generation API
+- [speedinvest](https://speedinvest.com/) - For the cosy hackathon atmosphere
 
 ---
 
-<p align="center">Built with ❤️ by hackers, for hackers</p>
+
