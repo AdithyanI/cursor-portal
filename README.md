@@ -1,6 +1,6 @@
 # 🌌 Cursor Portal: Your Gateway to the Digital Universe
 
-> Because real hackers never leave their IDE
+> conquer the world from the comfort of your IDE.
 
 ## 🚀 Vision
 
